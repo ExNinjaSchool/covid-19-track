@@ -1,113 +1,463 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(MaterialApp(
+    title: 'test',
+    home: MainPage(),
+  ));
 }
 
-class MyApp extends StatelessWidget {
+class MainPage extends StatelessWidget {
   // This widget is the root of your application.
+  final name = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
-      ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
+      body: new Container(
+        child: new Column(
+          children: [
+            new Container(
+              child: Padding(
+                padding: EdgeInsets.only(
+                    top: 130.0, left: 60.0, right: 60.0, bottom: 150.00),
+                child: new Image.asset('assets/Boreal.png'),
+              ),
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+            new Container(
+              width: double.infinity,
+              child: Padding(
+                padding: EdgeInsets.only(bottom: 10.0),
+                child: new Text(
+                  'Bienvenue!',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 15.0,
+                  ),
+                ),
+              ),
+            ),
+            new Container(
+              width: double.infinity,
+              child: Padding(
+                padding: EdgeInsets.only(bottom: 20.0),
+                child: new Text(
+                  'Pour debuter, entrez votre nom:',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 15.00,
+                  ),
+                ),
+              ),
+            ),
+            new Container(
+              width: double.infinity,
+              child: Padding(
+                padding: EdgeInsets.only(right: 150.0, left: 150.0),
+                child: TextField(
+                  controller: name,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+              ),
+            ),
+            new Container(
+              width: double.infinity,
+              child: Padding(
+                padding: EdgeInsets.only(top: 20.0, right: 200.0, left: 200.0),
+                child: RaisedButton(
+                  child: Text('Continuer'),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => SecondPage(name.text)),
+                    );
+                  },
+                ),
+              ),
             ),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+    );
+  }
+}
+
+class SecondPage extends StatelessWidget {
+  String textName = 'test';
+  SecondPage(String name){
+    this.textName = name;
+  }
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: new Container(
+        child: new Column(
+          children: [
+            new Container(
+              child: Padding(
+                padding: EdgeInsets.only(
+                    top: 40.0, left: 60.0, right: 60.0, bottom: 40.00),
+                child: new Image.asset('assets/Boreal.png'),
+              ),
+            ),
+            new Container(
+              width: double.infinity,
+              child: Padding(
+                padding: EdgeInsets.only(left: 60.0, right: 60.0),
+                child: new RichText(
+                  text: new TextSpan(
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    children: <TextSpan>[
+                      TextSpan(text: 'Bienvenue '),
+                      TextSpan(text: textName),
+                      TextSpan(text: '!'),
+                    ],
+                  ),
+                  textAlign: TextAlign.left,
+                ),
+              ),
+            ),
+            new Container(
+              width: double.infinity,
+              child: Padding(
+                padding: EdgeInsets.only(top: 20, left: 60.0, right: 60.0),
+                child: new Text("Pour acceder au campus aujourd'hui, tu dois completer le questionnaire.")
+              ),
+            ),
+            new Container(
+              width: double.infinity,
+              child: Padding(
+                padding: EdgeInsets.only(top: 20, left: 60.0, right: 60.0),
+                child: RaisedButton(
+                  child: Text('Completer le questionnaire'),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => ThirdPage(textName)),
+                    );
+                  },
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+class ThirdPage extends StatefulWidget {
+  @override
+  ThirdPageState createState() => ThirdPageState(this.yourName);
+
+  String yourName = 'test';
+  ThirdPage(String name){
+    this.yourName = name;
+  }
+}
+
+class ThirdPageState extends State<ThirdPage> {
+  String yourName = 'test';
+  ThirdPageState(String name){
+    this.yourName = name;
+  }
+
+  int mood = 0;
+  int voyage = 0;
+  int contact = 0;
+
+  static DateTime now = DateTime.now();
+  String formattedDate = DateFormat('yyyy-MM-dd').format(now);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: new Container(
+        child: new Column(
+          children: [
+            new Container(
+              child: Padding(
+                padding: EdgeInsets.only(
+                    top: 40.0, left: 60.0, right: 60.0, bottom: 40.00),
+                child: new Image.asset('assets/Boreal.png'),
+              ),
+            ),
+            new Container(
+              width: double.infinity,
+              child: Padding(
+                padding: EdgeInsets.only(top: 40.0, left: 60.0, right: 60.0),
+                child: new RichText(
+                  text: new TextSpan(
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    children: <TextSpan>[
+                      TextSpan(text: 'Formulaire COVID-19 pour '),
+                      TextSpan(text: yourName),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            new Container(
+              width: double.infinity,
+              child: Padding(
+                padding: EdgeInsets.only(top: 10.0, left: 60.0, right: 60.0, bottom: 40.00),
+                child: new RichText(
+                  text: new TextSpan(
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    children: <TextSpan>[
+                      TextSpan(text: 'Date '),
+                      TextSpan(text: formattedDate),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            new Container(
+              width: double.infinity,
+              child: Padding(
+                padding: EdgeInsets.only(left: 60.0, right: 60.0, bottom: 40.00),
+                child: new Text("Aujoud'hui, je me sens:", style: TextStyle(fontWeight: FontWeight.bold))
+              ),
+            ),
+            new Container(
+              width: double.infinity,
+              child: Padding(
+                padding: EdgeInsets.only(left: 60.0, right: 60.0, bottom: 40.00),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: <Widget>[
+                    IconButton(
+                      iconSize: 40.0,
+                      icon: Icon(Icons.sentiment_very_dissatisfied, color: mood == 1 ? Colors.red : Colors.black),
+                      onPressed: () {
+                        setState((){
+                          mood = 1;
+                        });
+                      },
+                    ),
+                    IconButton(
+                      iconSize: 40,
+                      icon: Icon(Icons.sentiment_dissatisfied,color: mood == 2 ? Colors.yellow : Colors.black),
+                      onPressed: () {
+                        setState((){
+                          mood = 2;
+                        });
+                      },
+                    ),
+                    IconButton(
+                      iconSize: 40,
+                      icon: Icon(Icons.sentiment_very_satisfied, color: mood == 3 ? Colors.green : Colors.black),
+                      onPressed: () {
+                        setState((){
+                          mood = 3;
+                        });
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            new Container(
+              width: double.infinity,
+              child: Padding(
+                padding: EdgeInsets.only(left: 60.0, right: 60.0, bottom: 40.00),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    const Flexible(
+                      child: Text("J'ai voyage hors du Canada dans les derniers 14 jours:"),
+                    ),
+                    SizedBox(width: 50),
+                    IconButton(
+                      iconSize: 40,
+                      icon: Icon(Icons.clear, color: voyage == 1 ? Colors.red : Colors.black),
+                      onPressed: () {
+                        setState((){
+                          voyage = 1;
+                        });
+                      },
+                    ),
+                    SizedBox(width: 10),
+                    IconButton(
+                      iconSize: 40,
+                      icon: Icon(Icons.check, color: voyage == 2 ? Colors.green : Colors.black),
+                      onPressed: () {
+                        setState((){
+                          voyage = 2;
+                        });
+                      },
+                    ),
+                    SizedBox(width: 50),
+                  ],
+                ),
+              ),
+            ),
+            new Container(
+              width: double.infinity,
+              child: Padding(
+                padding: EdgeInsets.only(left: 60.0, right: 60.0, bottom: 40.00),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    const Flexible(
+                      child: Text("J'ai ete en contacte avec un individu qui as eu COVID-19 dans les derniers 14 jours:"),
+                    ),
+                    SizedBox(width: 50),
+                    IconButton(
+                      iconSize: 40,
+                      icon: Icon(Icons.clear, color: contact == 1 ? Colors.red : Colors.black),
+                      onPressed: () {
+                        setState((){
+                          contact = 1;
+                        });
+                      },
+                    ),
+                    SizedBox(width: 10),
+                    IconButton(
+                      iconSize: 40,
+                      icon: Icon(Icons.check, color: contact == 2 ? Colors.green : Colors.black),
+                      onPressed: () {
+                        setState((){
+                          contact = 2;
+                        });
+                      },
+                    ),
+                    SizedBox(width: 50),
+                  ],
+                ),
+              ),
+            ),
+            new Container(
+              width: double.infinity,
+              child: Padding(
+                padding: EdgeInsets.only(top: 20, left: 160.0, right: 160.0),
+                child: RaisedButton(
+                  child: Text('Soumettre'),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => new FinalPage(hisName: yourName, hisMood: mood, hisVoyage: voyage, hisContact: contact)),
+                    );
+                  },
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+class FinalPage extends StatefulWidget{
+  FinalPage({this.hisName, this.hisMood, this.hisVoyage, this.hisContact});
+  final String hisName;
+  final int hisMood;
+  final int hisVoyage;
+  final int hisContact;
+
+  @override
+  State<StatefulWidget> createState() {return new FinalPageState();}
+}
+
+class FinalPageState extends State<FinalPage> {
+
+  @override
+  Widget build(BuildContext context) {
+    return widget.hisMood >= 2 && widget.hisVoyage == 1 && widget.hisContact == 1 ? Scaffold(
+      body: new Container(
+        child: new Column(
+          children: [
+            new Container(
+              child: Padding(
+                padding: EdgeInsets.only(
+                    top: 40.0, left: 60.0, right: 60.0, bottom: 10.00),
+                child: new Image.asset('assets/Boreal.png'),
+              ),
+            ),
+            new Container(
+              child: Padding(
+                padding: EdgeInsets.only(top: 40.0, left: 60.0, right: 60.0, bottom: 10.00),
+                child: new RichText(
+                  text: new TextSpan(
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    children: <TextSpan>[
+                      TextSpan(text: "Bienvenue a l'ecole "),
+                      TextSpan(text: widget.hisName)
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            new Container(
+              child: Padding(
+                padding: EdgeInsets.only(left: 60.0, right: 60.0, bottom: 30.00),
+                child: new Text("Vous pouvez rentrer aujourd'hui")
+              ),
+            ),
+            new Container(
+              child: Padding(
+                padding: EdgeInsets.only(left: 60.0, right: 60.0),
+                child: new Image.asset('assets/Allowed.png'),
+              ),
+            ),
+          ],
+        ),
+      ),
+    ) : Scaffold(
+      body: new Container(
+        child: new Column(
+          children: [
+            new Container(
+              child: Padding(
+                padding: EdgeInsets.only(
+                    top: 40.0, left: 60.0, right: 60.0, bottom: 40.00),
+                child: new Image.asset('assets/Boreal.png'),
+              ),
+            ),
+            new Container(
+              child: Padding(
+                padding: EdgeInsets.only(top: 40.0, left: 60.0, right: 60.0, bottom: 30.00),
+                child: new RichText(
+                  text: new TextSpan(
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    children: <TextSpan>[
+                      TextSpan(text: "Desolez, "),
+                      TextSpan(text: widget.hisName),
+                      TextSpan(text: "vous ne pouvez pas rentrez aujourd'hui")
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            new Container(
+              child: Padding(
+                padding: EdgeInsets.only(left: 60.0, right: 60.0),
+                child: new Image.asset('assets/Unfortunate.png'),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
